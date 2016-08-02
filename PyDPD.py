@@ -5,7 +5,7 @@ def getFileLines(filename):
   :param filename: The file name of the file to get the lines of.
   :type filename: str
   :returns: List[str] - A list of strings where each string represents a line
-  in the file.
+    in the file.
   """
   file = open(filename)
   lines = file.readLines()
@@ -20,7 +20,17 @@ def countLOC(fileLines):
   :type fileLines: List[str]
   :returns: int - The number of lines of code that are not comments.
   """
+  LOC = 0
   lines = getFileLines(filename)
   for line in lines:
-    if !line.strip().startsWith('//')
-      """ TODO: Add more conditions. """
+    strippedLine = line.strip()
+    """
+    Check to make sure that the current line is not a comment or blank line.
+    """
+    if    not strippedLine \
+      and not strippedLine.startsWith('//') \
+      and not strippedLine.startsWith('/*') \
+      and not strippedLine.startsWith('#') \
+      and not strippedLine.startsWith('"""'):
+        LOC += 1
+  return LOC        
