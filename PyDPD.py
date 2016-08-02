@@ -24,13 +24,11 @@ def countLOC(fileLines):
   lines = getFileLines(filename)
   for line in lines:
     strippedLine = line.strip()
-    """
-    Check to make sure that the current line is not a comment or blank line.
-    """
+    # Check to make sure that the current line is not a comment or blank line.
     if    not strippedLine \
       and not strippedLine.startsWith('//') \
       and not strippedLine.startsWith('/*') \
       and not strippedLine.startsWith('#') \
       and not strippedLine.startsWith('"""'):
         LOC += 1
-  return LOC        
+  return LOC
