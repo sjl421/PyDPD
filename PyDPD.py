@@ -8,7 +8,7 @@ def getFileLines(filename):
     in the file.
   """
   file = open(filename)
-  lines = file.readLines()
+  lines = file.readlines()
   file.close()
   return lines
 
