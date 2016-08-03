@@ -2,4 +2,7 @@ Auto Generated Documentation
 ============================
 
 .. automodule:: PyDPD
-   :members:	
+   :members:
+
+.. automodule:: UnitTests
+   :members:
