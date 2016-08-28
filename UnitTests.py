@@ -20,16 +20,32 @@ class TestFileIO(unittest.TestCase):
     """
 
     # Get the lines from the function in 'PyDPD.py' then add them together.
-    lines = getFileLines('UnitTestData\JS-Dataset-Parser.js')
+    lines = getFileLines('UnitTestData/JS-Dataset-Parser.js')
     addedLines = ''.join(lines)
 
     # Store the whole file into a string.
-    file = open('UnitTestData\JS-Dataset-Parser.js')
+    file = open('UnitTestData/JS-Dataset-Parser.js')
     fileString = file.read()
     file.close()
 
     # Compare the equality of the two results.
     self.assertEqual(fileString, addedLines)
+
+class TestLOCMetrics(unittest.TestCase):
+  """
+  A class for unit testing the various LOC metrics used in PyDPD.
+  """
+
+  def testLOCCount(self):
+    """
+    This test reads in the JS-Dataset-Parser.js file and compares the LOC
+    count with the known amount (348)
+
+    :param self: A parameter required for Python unit testing.
+    """
+    
+    lines = getFileLines('UnitTestData/JS-Dataset-Parser.js')
+    self.assertEqual(len(lines), 348)
 
 if __name__ == '__main__':
   unittest.main()
