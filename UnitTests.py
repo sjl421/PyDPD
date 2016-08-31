@@ -1,5 +1,6 @@
 import unittest
 from PyDPD import getFileLines
+from PyDPD import countLOC
 
 class TestFileIO(unittest.TestCase):
   """
@@ -44,8 +45,7 @@ class TestLOCMetrics(unittest.TestCase):
     :param self: A parameter required for Python unit testing.
     """
     
-    lines = getFileLines('UnitTestData/JS-Dataset-Parser.js')
-    self.assertEqual(len(lines), 348)
+    self.assertEqual(countLOC('UnitTestData/JS-Dataset-Parser.js'), 129)
 
 if __name__ == '__main__':
   unittest.main()

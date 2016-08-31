@@ -12,7 +12,7 @@ def getFileLines(filename):
   file.close()
   return lines
 
-def countLOC(fileLines):
+def countLOC(filename):
   """
   Counts the lines of code that are not comments.
 
@@ -22,13 +22,35 @@ def countLOC(fileLines):
   """
   LOC = 0
   lines = getFileLines(filename)
+  readingBlockComment = False # This flag will be updated in the loop below.
   for line in lines:
     strippedLine = line.strip()
-    # Check to make sure that the current line is not a comment or blank line.
-    if    not strippedLine \
-      and not strippedLine.startsWith('//') \
-      and not strippedLine.startsWith('/*') \
-      and not strippedLine.startsWith('#') \
-      and not strippedLine.startsWith('"""'):
-        LOC += 1
+    # Check to make sure that the current line is not single line comment or
+    # blank line.
+    if strippedLine \
+      and not strippedLine.startswith('//') \
+      and not strippedLine.startswith('#') \
+      and not strippedLine.startswith('"""'):
+        # Check to make sure that the code is not currently reading a block
+        # comment. Increment LOC count if it's not.
+        if not readingBlockComment:
+          if strippedLine.startswith('/*'):
+            readingBlockComment = True
+            if '*/' in strippedLine:
+              readingBlockComment = False
+              # If a comment block has ended, and there is code after it, then 
+              # it should still add to the LOC count.
+              if strippedLine.find('*/') <= len(strippedLine) - 3:
+                LOC += 1
+          else:
+            LOC += 1
+        else:
+          if '*/' in strippedLine:
+            readingBlockComment = False
+            # If a comment block has ended, and there is code after it, then it
+            # should still add to the LOC count.
+            if strippedLine.find('*/') <= len(strippedLine) - 3:
+              LOC += 1
   return LOC
+
+countLOC('UnitTestData/JS-Dataset-Parser.js')
