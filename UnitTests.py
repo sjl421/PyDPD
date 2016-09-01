@@ -39,13 +39,14 @@ class TestLOCMetrics(unittest.TestCase):
 
   def testLOCCount(self):
     """
-    This test reads in the JS-Dataset-Parser.js file and compares the LOC
-    count with the known amount (348)
+    This test reads in the example source files and compares the LOC
+    count with the known amounts.
 
     :param self: A parameter required for Python unit testing.
     """
     
     self.assertEqual(countLOC('UnitTestData/JS-Dataset-Parser.js'), 129)
+    self.assertEqual(countLOC('UnitTestData/PubNub.java'), 173)
 
 if __name__ == '__main__':
   unittest.main()
