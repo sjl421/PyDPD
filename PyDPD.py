@@ -1,3 +1,5 @@
+import os.path
+
 def getFileLines(filename):
   """
   Returns the lines from a file as a list.
@@ -20,6 +22,9 @@ def countLOC(filename):
   :type fileLines: List[str]
   :returns: int - The number of lines of code that are not comments.
   """
+  # First get the file extension since it comes in handy later on.
+  extension = os.path.splitext(filename)[1]
+
   LOC = 0
   lines = getFileLines(filename)
   readingBlockComment = False # This flag will be updated in the loop below.
@@ -29,7 +34,7 @@ def countLOC(filename):
     # blank line.
     if strippedLine \
       and not strippedLine.startswith('//') \
-      and not strippedLine.startswith('#') \
+      and not (strippedLine.startswith('#') and extension != '.cpp') \
       and not strippedLine.startswith('"""'):
         # Check to make sure that the code is not currently reading a block
         # comment. Increment LOC count if it's not.

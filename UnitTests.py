@@ -47,6 +47,7 @@ class TestLOCMetrics(unittest.TestCase):
     
     self.assertEqual(countLOC('UnitTestData/JS-Dataset-Parser.js'), 129)
     self.assertEqual(countLOC('UnitTestData/PubNub.java'), 173)
+    self.assertEqual(countLOC('UnitTestData/CivetServer.cpp'), 485)
 
 if __name__ == '__main__':
   unittest.main()
